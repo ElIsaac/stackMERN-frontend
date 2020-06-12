@@ -1,12 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Switch,Route} from 'react-router-dom'
-import Admin from './pages/Admin'
-import SignIn from './pages/Admin/SignIn'
-import AdminHome from './pages/Admin'
+import {BrowserRouter as Router, Switch,Route} from 'react-router-dom'
+
 import routes from './config/routes'
 
 import './App.scss';
-import Contact from './pages/Contact';
 
 
 
