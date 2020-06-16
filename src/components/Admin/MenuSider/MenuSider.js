@@ -16,7 +16,7 @@ export default function MenuSider(props) {
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                    <Link to={"/admin/menu-web"}>
+                    <Link to={"/admin/sign"}>
                         <MenuOutlined/>
                         <span className="nav-text">
                             Menu

@@ -1,16 +1,37 @@
-import React, {useState} from 'react'
-import {Layout} from 'antd'
-import { Route, Switch } from 'react-router-dom'
-import MenuTop from '../components/MenuTop'
+import React, {useState} from 'react';
+import {Layout} from 'antd';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import MenuSider from '../components/Admin/MenuSider'
+import MenuTop from '../components/MenuTop';
+import AdminSignIn from '../pages/Admin/SignIn/SignIn';
+import MenuSider from '../components/Admin/MenuSider';
 
 import './LayoutAdmin.scss'
+
+//import { obtenerToken, obtenerRefreshToken } from '../api/auth'
 
 export default function LayoutAdmin(props) {
     const [menuCollapsed, setMenuCollapsed]=useState(true)
     const { routes } = props;
     const { Header, Content, Footer } = Layout;
+
+    /* const accessToken = obtenerToken();
+    console.log('accessToken : '+accessToken);
+    const refreshToken = obtenerRefreshToken();
+    console.log('refreshToken : '+refreshToken); */
+
+    const user = null;
+
+    if(!user){
+        return(
+            <>
+             <Route path="/admin/sign/" component={AdminSignIn}></Route>
+             <Redirect to="/admin/sign/"></Redirect>
+            </>
+        )
+        
+    }
+
     return (
         <Layout>
             <MenuSider menuCollapsed={menuCollapsed}/>
