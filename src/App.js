@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch,Route} from 'react-router-dom'
+import AuthProvider from './providers/AuthProvider'
 
 import routes from './config/routes'
 
@@ -10,13 +11,15 @@ import './App.scss';
 function App() {
 
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
       <Switch>
         {routes.map((route, index) => (
           <RouteWithSubRoutes key={index} {...route} />
         ))}
       </Switch>
     </Router>
+    </AuthProvider>
 
   );
 }
@@ -25,7 +28,6 @@ function App() {
 
 
 function RouteWithSubRoutes(route){
-console.log(route);
 return (
   <Route
   path={route.path}

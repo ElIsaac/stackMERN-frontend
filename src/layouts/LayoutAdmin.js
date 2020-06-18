@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Layout} from 'antd';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import useAuth from '../hooks/useAuth'
 import MenuTop from '../components/MenuTop';
 import AdminSignIn from '../pages/Admin/SignIn/SignIn';
 import MenuSider from '../components/Admin/MenuSider';
@@ -14,40 +15,38 @@ export default function LayoutAdmin(props) {
     const [menuCollapsed, setMenuCollapsed]=useState(true)
     const { routes } = props;
     const { Header, Content, Footer } = Layout;
+    const {user, isLoading}=useAuth()
 
-    /* const accessToken = obtenerToken();
-    console.log('accessToken : '+accessToken);
-    const refreshToken = obtenerRefreshToken();
-    console.log('refreshToken : '+refreshToken); */
 
-    const user = null;
-
-    if(!user){
+    if(!user  && !isLoading ){
         return(
             <>
-             <Route path="/admin/sign/" component={AdminSignIn}></Route>
-             <Redirect to="/admin/sign/"></Redirect>
+             <Route path="/admin/sign" component={AdminSignIn}></Route>
+             <Redirect to="/admin/sign"></Redirect>
             </>
         )
         
     }
-
-    return (
-        <Layout>
-            <MenuSider menuCollapsed={menuCollapsed}/>
-            <Layout style={{marginLeft: menuCollapsed ? "80px":"200px"}}>
-                <Header>
-                    <MenuTop menuCollapsed={menuCollapsed} setMenuCollapsed={setMenuCollapsed} />
-                </Header>
-                <Content>
-                    <LoadRoutes routes={routes} />
-                </Content>
-                <Footer>
-                    isaac xd
-                </Footer>
+   
+    if(user && !isLoading){
+        return (
+            <Layout>
+                <MenuSider menuCollapsed={menuCollapsed}/>
+                <Layout style={{marginLeft: menuCollapsed ? "80px":"200px"}}>
+                    <Header>
+                        <MenuTop menuCollapsed={menuCollapsed} setMenuCollapsed={setMenuCollapsed} />
+                    </Header>
+                    <Content>
+                        <LoadRoutes routes={routes} />
+                    </Content>
+                    <Footer>
+                        isaac xd
+                    </Footer>
+                </Layout>
             </Layout>
-        </Layout>
-    )
+        )
+    }
+    return null;
 }
 
 function LoadRoutes(props){

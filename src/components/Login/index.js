@@ -27,7 +27,7 @@ export default class Login extends Component {
         e.preventDefault();
         
         const result = await iniciaSesion(this.state)
-        if(result.mensaje){
+         if(result.mensaje){
             notification["error"]({
                 message: result.mensaje
             })
@@ -40,7 +40,7 @@ export default class Login extends Component {
                 message: "Inicio de sesion correcto"
             })
             window.location.href="/admin"
-        }
+        } 
         console.log(result); 
     }
        
