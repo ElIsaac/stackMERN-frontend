@@ -1,13 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {Layout, Menu} from 'antd'
-import {HomeOutlined, MenuOutlined} from '@ant-design/icons'
+import {HomeOutlined, MenuOutlined, UserOutlined} from '@ant-design/icons'
 import './MenuSider.scss'
-export default function MenuSider(props) {
+function MenuSider(props) {
+    console.log(props)
     return (
         <Layout.Sider className="admin-menu-sider" collapsed={props.menuCollapsed}>
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-                <Menu.Item key="1">
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={[props.location.pathname]}>
+                <Menu.Item key="/admin">
                     <Link to={"/admin"}>
                         <HomeOutlined/>
                         <span className="nav-text">
@@ -15,15 +16,17 @@ export default function MenuSider(props) {
                         </span>
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="2">
-                    <Link to={"/admin/sign"}>
-                        <MenuOutlined/>
+                
+                <Menu.Item key="/admin/users">
+                    <Link to={"/admin/users"}>
+                        <UserOutlined/>
                         <span className="nav-text">
-                            Menu
+                            Usuarios
                         </span>
                     </Link>
                 </Menu.Item>
             </Menu>
         </Layout.Sider>
     )
-}
+    }
+    export default withRouter(MenuSider);
