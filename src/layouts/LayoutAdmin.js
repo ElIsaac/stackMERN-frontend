@@ -39,9 +39,6 @@ export default function LayoutAdmin(props) {
                     <Content>
                         <LoadRoutes routes={routes} />
                     </Content>
-                    <Footer>
-                        isaac xd
-                    </Footer>
                 </Layout>
             </Layout>
         )
