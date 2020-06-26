@@ -83,3 +83,44 @@ export function actualizarUsuario(token, user, userId){
     })
         
 }
+
+export function borrarUsuario(token, userId){
+    return fetch(`http://${config.nombre}/api/${config.version}/borrar-usuario/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: token
+        }
+    }).then(response => {
+        return response.json();
+    } ).then(result =>{
+        return result.mensaje
+    }).catch((err)=>{
+        return  err.mensaje
+    })
+        
+}
+
+export function autorizarUsuario(token, status, userId){
+    const url = `http://${config.nombre}/api/${config.version}/autorizar/${userId}`;
+    const params = {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: token
+        },
+        body: JSON.stringify({
+            activo: status
+        })
+    };
+
+    return fetch(url, params)
+    .then(response => {
+        return response.json();
+    } ).then(result =>{
+        return result.mensaje
+    }).catch((err)=>{
+        return  err.mensaje
+    })
+        
+}

@@ -8,6 +8,7 @@ export default function AdminUsers() {
     
     const [userActive, setUserActive] = useState([]);
     const [userInactive, setUserInactive] = useState([]);
+    const [reloadUsers, setReloadUsers] = useState(false)
     const token = obtenerToken();
 
     useEffect(() => {
@@ -17,12 +18,13 @@ export default function AdminUsers() {
         traerUsuariosActivos(token, false).then(response => {
             setUserInactive(response);
         });
-    }, [token])
+        setReloadUsers(false)
+    }, [token, reloadUsers])
 
 
     return (
         <div>
-            <UserList userActive={userActive} userInactive={userInactive} />
+            <UserList userActive={userActive} userInactive={userInactive} setReloadUsers={setReloadUsers} />
         </div>
     )
 }
