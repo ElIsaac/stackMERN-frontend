@@ -31,17 +31,33 @@ export default class Sign extends Component {
      onSubmit = async (e) => {
         e.preventDefault();
         
-            const result = await registrate(this.state)
-            if(result.ok===false){
-                notification["error"]({
-                    message: result.mensaje
-                })
-            }else{
-                notification["success"]({
-                    message: result.mensaje
-                })
-                this.cleanForm();
-            }
+         if (this.props.admin) {
+            const result = await registrate(this.state, true)
+             if (result.ok === false) {
+                 notification["error"]({
+                     message: result.mensaje
+                 })
+             } else {
+                 notification["success"]({
+                     message: result.mensaje
+                 })
+                 this.props.setReloadUsers(true)
+                 this.cleanForm();
+             }
+         }
+         else {
+             const result = await registrate(this.state, false)
+             if (result.ok === false) {
+                 notification["error"]({
+                     message: result.mensaje
+                 })
+             } else {
+                 notification["success"]({
+                     message: result.mensaje
+                 })
+                 this.cleanForm();
+             }
+         }
     }
        
     onInputChange = e => {
@@ -54,7 +70,7 @@ export default class Sign extends Component {
     render() {
         return (
                 <div className="card card-body">
-                    <h4>Registrate</h4>
+                    {this.props.admin ? <h6>Porfavor llene todos los campos</h6> : <h3>Registrate</h3>}
 
                    
                     <div className="form-group">

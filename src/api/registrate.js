@@ -1,6 +1,13 @@
 import config from './config'
-export default function registrate(datos){
-    return fetch(`http://${config.nombre}/api/${config.version}/registrate`, {
+export default function registrate(datos, admin){
+    let urlFinal;
+    if(admin){
+        urlFinal="registrate/administrador"
+    }else{
+        urlFinal="registrate"
+    }
+
+    return fetch(`http://${config.nombre}/api/${config.version}/${urlFinal}`, {
         method: 'POST',
         body: JSON.stringify(datos),
         headers: {

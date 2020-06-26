@@ -7,6 +7,7 @@ import { traerAvatar, borrarUsuario, autorizarUsuario } from '../../../api/usuar
 import { obtenerToken } from '../../../api/auth'
 import Modal from '../../Modal/Modal'
 import EditUser from './EditUser'
+import SignIn from '../../../components/SignIn'
 import { changeConfirmLocale } from 'antd/lib/modal/locale';
 
 const { confirm } = ModalAntd
@@ -17,6 +18,15 @@ export default function UserList(props) {
   const [isVisible, setIsVisible] = useState(false)
   const [modalTitle, setModalTitle] = useState("")
   const [modalContent, setModalContent] = useState("")
+
+  const modalAgregarUsuario=()=>{
+    setIsVisible(true)
+          setModalTitle("Agregar usuario")
+          
+          setModalContent(
+            <SignIn setReloadUsers={setReloadUsers} admin={true}/>
+          )
+  }
 
   const Eliminar=(user)=>{
     const token = obtenerToken();
@@ -64,10 +74,19 @@ export default function UserList(props) {
     <div>
       <div className="container">
         <h1 className="display-4">{viewUser ? "Usuarios Inactivos" : "Usuarios Activos"}</h1>
+        <div className="d-flex">
         <Switch
           defaultChecked
           onChange={() => setViewUser(!viewUser)}
         />
+        <Button
+        type="primary"
+        className="ml-auto"
+        onClick={modalAgregarUsuario}
+        >
+          Agregar Usuario
+        </Button>
+        </div>
         <hr className="my-4" />
 
 
