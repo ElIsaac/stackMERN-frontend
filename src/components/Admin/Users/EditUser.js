@@ -138,8 +138,6 @@ function EditForm(props){
         if(typeof userUpdated.avatar === "object"){
             subirAvatar(token, userUpdated.avatar, user._id).then(response =>{
                 
-                console.log(response)
-                /* 
                 userUpdated.avatar= response.avatarName;
                 actualizarUsuario(token, userUpdated, user._id).then(result =>{
                     notification["success"]({
@@ -147,7 +145,11 @@ function EditForm(props){
                     });
                     setIsVisible(false);
                     setReloadUsers(true);
-                }); */
+                }); 
+            }).catch(err=>{
+                notification["error"]({
+                message:err.mensaje
+            });
             });
         }else{
             actualizarUsuario(token, userUpdated, user._id).then(result =>{

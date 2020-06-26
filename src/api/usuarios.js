@@ -42,7 +42,7 @@ export function subirAvatar(token, avatar, userId){
         method: 'PUT',
         body: formData,
         headers: {
-            "Content-Type": "application/json",
+            
             Authorization: token
         }
     }).then(response => {
